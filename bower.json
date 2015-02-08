@@ -1,0 +1,8 @@
+{
+  "name": "perth-code-dojo-7-git-html5-bootstrap",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "modernizr": "~2.8.2"
+  }
+}
