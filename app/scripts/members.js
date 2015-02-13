@@ -1,4 +1,6 @@
+"use strict";
 
+(function(){
 
 $.getJSON( "http://localhost:3000/api/users", function( data ) {
   $( ".result" ).html( data );
@@ -14,3 +16,5 @@ $( ".members" ).html(items);
 
 
 });
+
+}());
