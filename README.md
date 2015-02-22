@@ -10,5 +10,5 @@ npm install http-server -g
 
 Run localserver to host files
 
-http-server ./app -p 890
+http-server ./ -p 890
 

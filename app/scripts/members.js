@@ -2,10 +2,8 @@
 
 (function(){
 
-$.getJSON( "http://localhost:3000/api/users", function( data ) {
+$.getJSON( "http://perthcodedojo7service-pmezdnzk4k.elasticbeanstalk.com/api/users/", function( data ) {
   $( ".result" ).html( data );
-  //alert(data);
-  //alert( "Load was performed." );
 
   var items = [];
   $.each( data.users, function( key, val ) {
