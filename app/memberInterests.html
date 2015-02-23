@@ -9,16 +9,106 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <!-- build:js scripts/vendor/modernizr.js -->
-    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
     <!-- endbuild -->
+    <style>
+    	.browsehappy {
+		  margin: 0.2em 0;
+		  background: #ccc;
+		  color: #000;
+		  padding: 0.2em 0;
+		}
 
+		/* Space out content a bit */
+		body {
+		  padding-top: 20px;
+		  padding-bottom: 20px;
+		}
+
+		/* Everything but the jumbotron gets side spacing for mobile first views */
+		.header,
+		.marketing,
+		.footer {
+		  padding-left: 15px;
+		  padding-right: 15px;
+		}
+
+		/* Custom page header */
+		.header {
+		  border-bottom: 1px solid #e5e5e5;
+		}
+
+		/* Make the masthead heading the same height as the navigation */
+		.header h3 {
+		  margin-top: 0;
+		  margin-bottom: 0;
+		  line-height: 40px;
+		  padding-bottom: 19px;
+		}
+
+		/* Custom page footer */
+		.footer {
+		  padding-top: 19px;
+		  color: #777;
+		  border-top: 1px solid #e5e5e5;
+		}
+
+		.container-narrow > hr {
+		  margin: 30px 0;
+		}
+
+		/* Main marketing message and sign up button */
+		.jumbotron {
+		  text-align: center;
+		  border-bottom: 1px solid #e5e5e5;
+		}
+
+		.jumbotron .btn {
+		  font-size: 21px;
+		  padding: 14px 24px;
+		}
+
+		/* Supporting marketing content */
+		.marketing {
+		  margin: 40px 0;
+		}
+
+		.marketing p + h4 {
+		  margin-top: 28px;
+		}
+
+		/* Responsive: Portrait tablets and up */
+		@media screen and (min-width: 768px) {
+		  .container {
+		    max-width: 730px;
+		  }
+
+		  /* Remove the padding we set earlier */
+		  .header,
+		  .marketing,
+		  .footer {
+		    padding-left: 0;
+		    padding-right: 0;
+		  }
+
+		  /* Space out the masthead */
+		  .header {
+		    margin-bottom: 30px;
+		  }
+
+		  /* Remove the bottom border on the jumbotron for visual effect */
+		  .jumbotron {
+		    border-bottom: 0;
+		  }
+		}
+    </style>
   </head>
   <body>
     <!--[if lt IE 10]>
@@ -39,48 +129,67 @@
       </div>
 
       <div class="row marketing">
-      				<iframe width="920" height="570" src="https://api.meetup.com/topics.json/?name=Perth-Code-Dojo&key=4b2e72e665f2b1774653af1e222e46" frameborder="0"></iframe>
+      		<h4>Ranked Member Interests:</h4><br>	
       </div>
 
       <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p>From dummped JSON to <span class="glyphicon glyphicon-heart"></span></p>
       </div>
 
     </div>
-
-
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
-
-        <!-- build:js(.) scripts/plugins.js -->
-        <script src="/bower_components/bootstrap/js/affix.js"></script>
-        <script src="/bower_components/bootstrap/js/alert.js"></script>
-        <script src="/bower_components/bootstrap/js/dropdown.js"></script>
-        <script src="/bower_components/bootstrap/js/tooltip.js"></script>
-        <script src="/bower_components/bootstrap/js/modal.js"></script>
-        <script src="/bower_components/bootstrap/js/transition.js"></script>
-        <script src="/bower_components/bootstrap/js/button.js"></script>
-        <script src="/bower_components/bootstrap/js/popover.js"></script>
-        <script src="/bower_components/bootstrap/js/carousel.js"></script>
-        <script src="/bower_components/bootstrap/js/scrollspy.js"></script>
-        <script src="/bower_components/bootstrap/js/collapse.js"></script>
-        <script src="/bower_components/bootstrap/js/tab.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
+        <script>
+        	function sortByFrequencyAndRemoveDuplicates(array) {
+			    var frequency = {}, value;
+
+			    // compute frequencies of each value
+			    for(var i = 0; i < array.length; i++) {
+			        value = array[i];
+			        if(value in frequency) {
+			            frequency[value]++;
+			        }
+			        else {
+			            frequency[value] = 1;
+			        }
+			    }
+
+			    // make array from the frequency object to de-duplicate
+			    var uniques = [];
+			    for(value in frequency) {
+			        uniques.push(value);
+			    }
+
+			    // sort the uniques array in descending order by frequency
+			    function compareFrequency(a, b) {
+			        return frequency[b] - frequency[a];
+			    }
+
+			    return uniques.sort(compareFrequency);
+			}
+
+        	$( document ).ready(function() {
+        		var interests = [];
+        		$.ajax({
+				  url: "https://api.meetup.com/members?order=name&group_urlname=Perth-Code-Dojo&offset=0&photo-host=public&format=json&page=20&sig_id=115526372&sig=fd96b8ec8d89715b0361c805c6578363eb21dec8",
+				  dataType: "jsonp",
+				  success: function (data) {
+				    console.log(data)
+				    for (i in data.results) {
+				    	for (b in data.results[i].topics) {
+				    		console.log(data.results[i].topics[b])
+				    		interests.push(data.results[i].topics[b].name);
+				    	}
+				    }
+				    var sortedinterests = sortByFrequencyAndRemoveDuplicates(interests); 
+				    for (b in sortedinterests) {
+				    	var num = b;
+				    	num++;
+				    	$(".marketing").append( num + ". " + sortedinterests[b] + "<br>");
+					}
+				}
+				});
+			});
+        </script>
         <!-- endbuild -->
 </body>
 </html>
