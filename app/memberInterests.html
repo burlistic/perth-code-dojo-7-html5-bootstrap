@@ -84,3 +84,198 @@
         <!-- endbuild -->
 </body>
 </html>
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>perth code dojo</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- endbuild -->
+    <style>
+    	.browsehappy {
+		  margin: 0.2em 0;
+		  background: #ccc;
+		  color: #000;
+		  padding: 0.2em 0;
+		}
+
+		/* Space out content a bit */
+		body {
+		  padding-top: 20px;
+		  padding-bottom: 20px;
+		}
+
+		/* Everything but the jumbotron gets side spacing for mobile first views */
+		.header,
+		.marketing,
+		.footer {
+		  padding-left: 15px;
+		  padding-right: 15px;
+		}
+
+		/* Custom page header */
+		.header {
+		  border-bottom: 1px solid #e5e5e5;
+		}
+
+		/* Make the masthead heading the same height as the navigation */
+		.header h3 {
+		  margin-top: 0;
+		  margin-bottom: 0;
+		  line-height: 40px;
+		  padding-bottom: 19px;
+		}
+
+		/* Custom page footer */
+		.footer {
+		  padding-top: 19px;
+		  color: #777;
+		  border-top: 1px solid #e5e5e5;
+		}
+
+		.container-narrow > hr {
+		  margin: 30px 0;
+		}
+
+		/* Main marketing message and sign up button */
+		.jumbotron {
+		  text-align: center;
+		  border-bottom: 1px solid #e5e5e5;
+		}
+
+		.jumbotron .btn {
+		  font-size: 21px;
+		  padding: 14px 24px;
+		}
+
+		/* Supporting marketing content */
+		.marketing {
+		  margin: 40px 0;
+		}
+
+		.marketing p + h4 {
+		  margin-top: 28px;
+		}
+
+		/* Responsive: Portrait tablets and up */
+		@media screen and (min-width: 768px) {
+		  .container {
+		    max-width: 730px;
+		  }
+
+		  /* Remove the padding we set earlier */
+		  .header,
+		  .marketing,
+		  .footer {
+		    padding-left: 0;
+		    padding-right: 0;
+		  }
+
+		  /* Space out the masthead */
+		  .header {
+		    margin-bottom: 30px;
+		  }
+
+		  /* Remove the bottom border on the jumbotron for visual effect */
+		  .jumbotron {
+		    border-bottom: 0;
+		  }
+		}
+    </style>
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Dojo List</a></li>
+          <li><a href="members.html">Members</a></li>
+          <li class="active"><a href="memberInterests.html">Members Interests</a></li>
+          <li><a href="#">Sponsors</a></li>
+        </ul>
+        <h3 class="text-muted">Perth Code Dojo!!!</h3>
+      </div>
+
+      <div class="row marketing">
+      		<h4>Ranked Member Interests:</h4><br>	
+      </div>
+
+      <div class="footer">
+        <p>From dummped JSON to <span class="glyphicon glyphicon-heart"></span></p>
+      </div>
+
+    </div>
+        <script src="scripts/main.js"></script>
+        <script>
+        	function sortByFrequencyAndRemoveDuplicates(array) {
+			    var frequency = {}, value;
+
+			    // compute frequencies of each value
+			    for(var i = 0; i < array.length; i++) {
+			        value = array[i];
+			        if(value in frequency) {
+			            frequency[value]++;
+			        }
+			        else {
+			            frequency[value] = 1;
+			        }
+			    }
+
+			    // make array from the frequency object to de-duplicate
+			    var uniques = [];
+			    for(value in frequency) {
+			        uniques.push(value);
+			    }
+
+			    // sort the uniques array in descending order by frequency
+			    function compareFrequency(a, b) {
+			        return frequency[b] - frequency[a];
+			    }
+
+			    return uniques.sort(compareFrequency);
+			}
+
+        	$( document ).ready(function() {
+        		var interests = [];
+        		$.ajax({
+				  url: "https://api.meetup.com/members?order=name&group_urlname=Perth-Code-Dojo&offset=0&photo-host=public&format=json&page=20&sig_id=115526372&sig=fd96b8ec8d89715b0361c805c6578363eb21dec8",
+				  dataType: "jsonp",
+				  success: function (data) {
+				    console.log(data)
+				    for (i in data.results) {
+				    	for (b in data.results[i].topics) {
+				    		console.log(data.results[i].topics[b])
+				    		interests.push(data.results[i].topics[b].name);
+				    	}
+				    }
+				    var sortedinterests = sortByFrequencyAndRemoveDuplicates(interests); 
+				    for (b in sortedinterests) {
+				    	var num = b;
+				    	num++;
+				    	$(".marketing").append( num + ". " + sortedinterests[b] + "<br>");
+					}
+				}
+				});
+			});
+        </script>
+        <!-- endbuild -->
+</body>
+</html>
