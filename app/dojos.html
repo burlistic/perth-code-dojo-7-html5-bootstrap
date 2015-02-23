@@ -1,0 +1,27 @@
+
+<html>
+<header>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+	</header>
+<body class="container">
+	<h1>Code Dojo</h1>
+	<h2>Dojos</h2>
+<span class="dojos">
+</span>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript">
+
+	$.get('http://localhost:3000/api/dojos', function(data){
+ var items = [];
+  $.each( data.dojos, function( key, val ) {
+    items.push( "<li id='" + key + "'>" + val.title + " " + val.date + "</li>" );
+  });
+
+$( ".dojos" ).html(items);
+});
+
+
+</script>
