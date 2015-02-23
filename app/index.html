@@ -15,6 +15,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <script src="/bower_components/bootstrap/dist/bootstrap.min.js"></script>
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
@@ -25,17 +26,30 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="navbar-its-cool">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button> 
+
+          <strong class="navbar-brand">Perth Code Dojo!!!</strong>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-its-cool">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Dojo List</a></li>
+            <li><a href="members.html">Members</a></li>
+            <li><a href="#">Sponsors</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Dojo List</a></li>
-          <li><a href="members.html">Members</a></li>
-          <li><a href="#">Sponsors</a></li>
-        </ul>
-        <h3 class="text-muted">Perth Code Dojo!!!</h3>
-      </div>
 
       <div class="jumbotron">
         <h1><marquee>Get ready to code!</marquee></h1>
