@@ -1,7 +1,5 @@
 # perth-code-dojo-7-html5-bootstrap
 
-TEST
-
 Install NodeJS (which comes with npm the node package manager)
 
 http://nodejs.org/ - and follow instructions
